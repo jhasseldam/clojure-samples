@@ -39,10 +39,55 @@
     [& numbers]
     (map negate numbers))
 
-;; Deconstruct a vector into named elements. Now first and second are single elements: first and second element 
-;; of the parameter vector respectively. The rest of the elements (if any) are stored in "rest"
+;; # DECONSTRUCTION
+;; Think of deconstruction as a way to tell Clojure how to associate names with values
+
+;; Automatically decontruct a list of arguments when calling a function into: 
+;; friend which contains the first argument and & friends which contains the rest
+(defn deconstruct-args 
+    [first & rest]
+    (println "The first friend is" first)
+    (map println rest))
+
+;; This decontruction is possible with more aguments as well
+(defn deconstruct-more-args
+    [first second & rest]
+    (println "First:" first)
+    (println "Second" second)
+    (map println rest))
+
+;; It is also possible to descontruct a vector. Notice the difference that the arg vector is given as a vector with named values
+;; as opposed to just a vector with binding names as above
+;; This is similar to the pattern matching style: | first::second::third -> ... in F#
 (defn deconstruct-vector
-    [[first second & rest]]
-    (println "First element is" first)
-    (println "Second element is" second)
-    (println "The rest of the vector is" rest))
+    [[first second third]]
+    (println "First: " first)
+    (println "Second: " second)
+    (println "Third: " third))
+
+;; Even though the parms are defined as a vector, it is also possible to pass a list as an argument to this function
+;; the list will automatically be converted to a vector:
+(deconstruct-vector ["One" "Two" "Three"]) ;; This is fine
+(deconstruct-vector '("One" "Two" "Three")) ;; This is also fine
+
+;; Deconstruction a map looks very similar
+(defn deconstruct-map
+    [{height :height width :width}]
+    (println "Height = " height)
+    (println "Width = " width)
+    (println "The area is: " (* height width)))
+
+
+;; # ANONYMOUS FUNCTIONS
+;; Using functions without first having to name them
+
+;; Square a vector of numbers using an anonymous square function
+(defn demo-anonymous-function
+    [numbers]
+    (map (fn [n] (* n n)) numbers))
+
+;; Clojure suports a short syntax for writing anonymous functions
+;; The following is exactly the same as above:
+(defn demo-short-anonymous-function
+    [numbers]
+    (map #(* % %) numbers))
