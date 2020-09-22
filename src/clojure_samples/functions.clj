@@ -91,3 +91,20 @@
 (defn demo-short-anonymous-function
     [numbers]
     (map #(* % %) numbers))
+
+;; Recurive calls and looping
+;; A naive non-tail-call-optimized approach to recursively calculating the sum of numbers from 1 to n
+(defn recursive-sum ([n]
+     (if (= n 0)
+         0
+         (+ n (recursive-sum (- n 1)))))) 
+
+;; Recursive functions are more effectively handled by using a loop instead. 
+;; This will also lead to better performance
+;; Here the two arguments in the loop are both declared with default values of 0
+(defn loop-sum ([n]
+    (loop [i 0 
+           sum 0]
+        (if (<= i n)
+            (recur (inc i) (+ i sum))
+            sum))))
