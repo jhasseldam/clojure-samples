@@ -1,3 +1,4 @@
+(ns samples.collections)
 
 ;; # VECTORS
 ;; Vectors are similar to arrays
@@ -31,5 +32,5 @@
 (set [1 2 3 4]) ;; Create a set from a vector
 (set '(1 2 3 4)) ;; Create a set from a list
 (contains? #{1 2 3 4 } 4) ;; Returns true if 4 is found in the set
-(:c #{:z :y :h :a}) ;; Returns the keyword if it is found in the set
+(:a #{:z :y :h :a}) ;; Returns the keyword if it is found in the set, else return nil
 (get #{"Well" "hello" "there"} "good day") ;; Returns nil because "good day" is not found in the set

@@ -39,6 +39,18 @@
     [& numbers]
     (map negate numbers))
 
+(negate-them-all 1 2 3 4 5 6 6)
+
+;; Lets imagine we wanted a negate-them-all functions which takes a set instea
+;; The difference is subtle but: & numbers means arguments and just numbers means a single argument
+;; which in this case happens to be a vector
+(defn negate-them-all'
+  [numbers]
+  (map negate numbers))
+  
+(negate-them-all' (range 1 100))
+  
+
 ;; # DECONSTRUCTION
 ;; Think of deconstruction as a way to tell Clojure how to associate names with values
 
