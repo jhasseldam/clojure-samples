@@ -115,8 +115,21 @@
 ;; This will also lead to better performance
 ;; Here the two arguments in the loop are both declared with default values of 0
 (defn loop-sum ([n]
-    (loop [i 0 
-           sum 0]
-        (if (<= i n)
-            (recur (inc i) (+ i sum))
-            sum))))
+  (loop [i 0 
+         sum 0]
+      (if (<= i n)
+          (recur (inc i) (+ i sum))
+          sum))))
+
+
+;;The built-in map function works on sequences and is indefferent to the actual datastructure given
+(defn singing [item]
+  (println "Head shoulders knees and" item "knees and" item))
+
+;; So we can all above implementation with
+;; Vectors
+(map singing ["toes" "fingers"])
+;; Lists
+(map singing '("eyes" "mouth"))
+;; or Hash-sets
+(map singing #{"ham" "cheese"})
